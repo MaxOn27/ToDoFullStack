@@ -126,3 +126,64 @@
     width: 35%;
     padding: 1% 3%;
 }
+
+.App .to_do_body .to_do div button:hover {
+    cursor: pointer;
+}
+
+
+
+.edit_modal {
+    width: 50%;
+    height: 40%;
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255);
+    border-radius: 20px;
+    z-index: 1000;
+}
+
+.edit_modal .arrow-left-btn {
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    margin: 1% 2%;
+    font-size: 30px;
+    color: hsl(200, 50%, 50%);
+}
+
+.edit-block {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.edit-block input {
+    margin: 2%;
+    height: 10%;
+    padding: 0 1%;
+    width: 300px;
+    border: none;
+    border-bottom: 3px solid hsl(200, 50%, 50%);
+    outline: none;
+    font-size: 20px;
+}
+
+.edit-block input::placeholder {
+    font-size: 20px;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .7);
+    z-index: 1000;
+}

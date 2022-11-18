@@ -14,7 +14,17 @@ app.get("/api/toDoList", (req, res) => {
     db.execute("SELECT * FROM todolist")
         .then(([toDoList]) => {
             res.send(toDoList);
-            console.log("Response: ", toDoList)
+        })
+        .catch(error => {
+            console.log(error);
+        });
+});
+
+app.get("/api/todo/:id", (req, res) => {
+    const {id} = req.params;
+    db.execute(`SELECT todo, id FROM todolist WHERE id = ?`, [id])
+        .then(([todo]) => {
+            res.send(todo);
         })
         .catch(error => {
             console.log(error);
@@ -33,6 +43,18 @@ app.post("/api/post_newToDO",
                 }
             );
 
+    });
+
+app.put("/api/update/:id",
+    (req, res) => {
+        const {todo, id} = req.body;
+        db.execute("UPDATE todolist SET todo = ? where id = ?", [todo, id], (err, result) => {
+            if (err) {
+                res.send("Error")
+            } else {
+                res.send("result")
+            }
+        });
     });
 
 app.delete("/api/delete_todo/:id",
