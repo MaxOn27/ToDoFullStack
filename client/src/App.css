@@ -20,9 +20,10 @@
     outline: none;
     border: 1px solid hsl(200, 50%, 50%);
     border-radius: 5px;
-    height: 35%;
+    min-height: 30px;
     width: 300px;
     padding: 0 1%;
+    margin: 1%;
 }
 
 .App .new_todo_form input:hover, .App .new_todo_form input:focus {
@@ -35,7 +36,7 @@
     outline: none;
     border: 1px solid hsl(200, 50%, 50%);
     border-radius: 5px;
-    height: 35%;
+    min-height: 30px;
     width: 150px;
 }
 
@@ -55,29 +56,32 @@
     width: 100%;
     background-color: hsl(200, 50%, 50%);
     display: grid;
-    grid-template-columns: repeat(1, 100%);
+    grid-template-columns: 82% 60%;
+    border-bottom: 1px solid hsl(200, 50%, 50%);
 }
 
-.App .to_do_header p, .App .to_do_header div {
+.App .to_do_header p, .App .to_do_header button {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     font-weight: 700;
     color: hsl(255, 100%, 100%);
 }
 
-.App .to_do_header div {
-    border-bottom: 1px solid hsl(200, 50%, 50%);
+.App .to_do_header p {
+    font-size: 20px;
 }
 
 .App .to_do_header button {
-    background-color: hsl(255, 100%, 100%);
-    color: hsl(0, 0%, 0%);
-    font-weight: 700;
+    position: relative;
+    right: 0;
+    width: 10%;
     outline: none;
-    border-radius: 5px;
-    width: 35%;
-    padding: 1% 3%;
+    background: none;
+    border: none;
+    color: hsl(255, 100%, 100%);
+    font-weight: 700;
+    font-size: 25px;
 }
 
 .App .to_do_body {

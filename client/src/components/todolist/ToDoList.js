@@ -1,5 +1,7 @@
 import React, {useState, useEffect, Fragment} from 'react';
 import Axios from "axios";
+import {FaPlus} from "react-icons/fa";
+
 import Modal from "../Modal/Modal";
 
 import "../../App.css";
@@ -44,8 +46,11 @@ const ToDoList = () => {
             <div className="to_do_list">
                 <div className="to_do_header">
                     <p>
-                        Tasks
+                        TO-DOs
                     </p>
+                    <button>
+                        <FaPlus/>
+                    </button>
                 </div>
                 <div className="to_do_body">
                     {toDoList.map(todoItem => (
