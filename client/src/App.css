@@ -1,7 +1,7 @@
 .App  {
     height: 100vh;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: flex-start;
     align-items: center;
     flex-direction: column;
     font-family: "Fira Sans", sans-serif;
@@ -49,7 +49,7 @@
     flex-direction: column;
     align-items: center;
     border: 1px solid hsla(200, 50%, 50%, 0.55);
-    width: 70%;
+    width: 50%;
 }
 
 .App .to_do_header {
@@ -73,6 +73,7 @@
 }
 
 .App .to_do_header button {
+    cursor: pointer;
     position: relative;
     right: 0;
     width: 10%;
@@ -135,13 +136,11 @@
     cursor: pointer;
 }
 
-
-
 .edit_modal {
     width: 50%;
     height: 40%;
     position: fixed;
-    top: 30%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: rgba(255, 255, 255);
@@ -159,7 +158,7 @@
     color: hsl(200, 50%, 50%);
 }
 
-.edit-block {
+.add-update-todo {
     height: 100%;
     display: flex;
     justify-content: center;
@@ -167,19 +166,46 @@
     flex-direction: column;
 }
 
-.edit-block input {
+.add-update-todo input {
     margin: 2%;
     height: 10%;
     padding: 0 1%;
     width: 300px;
     border: none;
+    border-radius: 5px;
     border-bottom: 3px solid hsl(200, 50%, 50%);
     outline: none;
     font-size: 20px;
 }
 
-.edit-block input::placeholder {
+.add-update-todo input:focus, .add-update-todo input:hover {
+    -webkit-box-shadow: 0 5px 6px -4px hsla(0, 0%, 0%, .55);
+    -moz-box-shadow: 0 5px 6px -4px hsla(0, 0%, 0%, .55);
+    box-shadow: 0 5px 6px -4px hsla(0, 0%, 0%, .55);
+    transition: ease-out 0.1s;
+}
+
+.add-update-todo input::placeholder {
     font-size: 20px;
+}
+
+.add-update-todo button {
+    background: none;
+    border: 3px solid hsl(200, 50%, 50%);
+    border-radius: 5px;
+    outline: none;
+    width: 150px;
+    font-size: 20px;
+    margin: 2%;
+    padding: 0 1%;
+}
+
+.add-update-todo button:hover {
+    cursor: pointer;
+    -webkit-box-shadow: 0 1px 8px 0 hsla(0, 0%, 0%, .55);
+    -moz-box-shadow: 0 1px 8px 0 hsla(0, 0%, 0%, .55);
+    box-shadow: 0 1px 8px 0 hsla(0, 0%, 0%, .55);
+    transition: ease-out 0.1s;
 }
 
 .overlay {

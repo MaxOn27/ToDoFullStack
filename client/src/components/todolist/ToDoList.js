@@ -3,13 +3,21 @@ import Axios from "axios";
 import {FaPlus} from "react-icons/fa";
 
 import Modal from "../Modal/Modal";
+import NewToDo from "../NewToDo/NewToDo";
 
 import "../../App.css";
 
 const ToDoList = () => {
     const [toDoList, setToDoList] = useState([]);
+    const [isOpenCreateTodo, setIsOpenCreateTodo] = useState(false);
     const [isOpenModal, setIsOpenModal] = useState(false);
     const [todo, setTodo] = useState("");
+
+    useEffect(() => {
+        getToDoList()
+            .then(() => console.log("TO-DOs", toDoList))
+            .catch(error => console.log("error", error));
+    }, []);
 
     const getToDoList = async () => {
         const response = await Axios
@@ -25,12 +33,6 @@ const ToDoList = () => {
         setIsOpenModal(true);
     };
 
-    useEffect(() => {
-        getToDoList()
-            .then((response) => console.log("response", response.data))
-            .catch((error) => console.log("error", error));
-    }, []);
-
     const deleteTodo = ({id, todo}) => {
         if (window.confirm(`Do you really want to delete ${todo}?`)) {
             Axios.delete(`http://localhost:8080/api/delete_todo/${id}`)
@@ -41,6 +43,10 @@ const ToDoList = () => {
         setTimeout(() => getToDoList(), 200);
     };
 
+    const handleEscape = () => {
+        setIsOpenModal(false);
+    };
+
     return (
         <Fragment>
             <div className="to_do_list">
@@ -48,7 +54,7 @@ const ToDoList = () => {
                     <p>
                         TO-DOs
                     </p>
-                    <button>
+                    <button onClick={() => setIsOpenCreateTodo(true)}>
                         <FaPlus/>
                     </button>
                 </div>
@@ -75,6 +81,12 @@ const ToDoList = () => {
                     todo={todo[0]}
                     open={isOpenModal}
                     onClose={() => setIsOpenModal(false)}
+                    handleEscape={handleEscape}
+                />
+                <NewToDo
+                    openCreateTodo={isOpenCreateTodo}
+                    onClose={() => setIsOpenCreateTodo(false)}
+                    toDoList={toDoList}
                 />
             </div>
         </Fragment>

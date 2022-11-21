@@ -5,12 +5,25 @@ import {FaArrowLeft} from "react-icons/fa"
 
 import "../../App.css";
 
-const Modal = ({open, onClose, todo}) => {
+const Modal = ({open, onClose, todo, handleEscape}) => {
     const [updatedTodo, setUpdatedTodo] = useState({todo: ""});
 
     useEffect(() => {
-            setUpdatedTodo(todo);
+        setUpdatedTodo(todo);
     }, [todo]);
+
+    useEffect(() => {
+        const keyDownHandler = (event) => {
+            if (event.key === 'Escape') {
+                event.preventDefault();
+                handleEscape();
+            }
+        }
+        document.addEventListener("keydown", keyDownHandler);
+
+        return () =>
+            document.removeEventListener("keydown", keyDownHandler);
+    }, []);
 
     const updateTodo = async (event) => {
         event.preventDefault();
@@ -25,28 +38,32 @@ const Modal = ({open, onClose, todo}) => {
             .catch((error) => console.log(error));
     }
 
-    if(!open) return false;
+    if (!open) return false;
     return ReactDOM.createPortal(
         <Fragment>
             <div className="overlay"/>
             <div className="edit_modal">
-                <button onClick={onClose} className="arrow-left-btn">
+                <button onClick={onClose}
+                        className="arrow-left-btn">
                     <FaArrowLeft/>
                 </button>
                 <form
-                    action=""
+                    action="/"
                     method="PUT"
-                    className="edit-block"
+                    className="add-update-todo"
                     onSubmit={updateTodo}
                 >
                     <input
                         type="text"
                         value={updatedTodo ? updatedTodo.todo : ""}
                         onChange={(event) => setUpdatedTodo(() => {
-                            return {todo: event.target.value, id: updatedTodo.id}
+                            return {
+                                todo: event.target.value,
+                                id: updatedTodo.id
+                            }
                         })}
                     />
-                    <button >SUBMIT</button>
+                    <button>SUBMIT</button>
                 </form>
             </div>
         </Fragment>,
