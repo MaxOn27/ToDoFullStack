@@ -1,13 +1,16 @@
 import './App.css';
 
-import ToDoList from "./components/todolist/ToDoList";
-import NewToDo from "./components/NewToDo/NewToDo";
+import TodoList from "./components/TodoList/TodoList";
+import CreateTodo from "./components/CreateTodo/CreateTodo";
+import TodoProvider from "./providers/TodoProvider";
 
 function App() {
   return (
     <div className="App">
-      <NewToDo/>
-      <ToDoList/>
+        <TodoProvider>
+          <CreateTodo/>
+          <TodoList/>
+        </TodoProvider>
     </div>
   );
 }

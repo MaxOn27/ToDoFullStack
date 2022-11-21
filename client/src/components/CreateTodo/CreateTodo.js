@@ -5,13 +5,13 @@ import {FaArrowLeft} from "react-icons/fa";
 
 import "../../App.css"
 
-const NewToDo = ({openCreateTodo, onClose, toDoList}) => {
+const CreateTodo = ({openCreateTodo, onClose, todoList}) => {
     const [todo, setTodo] = useState("");
 
     const postNewTodo = async (event) => {
         event.preventDefault();
 
-        const isInList = toDoList.find(listItem => listItem.todo === todo);
+        const isInList = todoList.find(listItem => listItem.todo === todo);
 
         if (typeof isInList !== "undefined")
             return alert("The TO-DO is already in the list!");
@@ -20,20 +20,17 @@ const NewToDo = ({openCreateTodo, onClose, toDoList}) => {
 
         if (todo !== "") window.location.reload();
 
-        await Axios.post(
+        await Axios.post
+        (
             "http://localhost:8080/api/post_newToDO",
-            {
-                todo
-            }
+            {todo}
         );
-
-
     };
 
     if (!openCreateTodo) return false;
     return ReactDOM.createPortal(
         <Fragment>
-            <div className="overlay"/>
+            <div className="overlay" onClick={onClose}/>
             <div className="edit_modal">
                 <button onClick={onClose} className="arrow-left-btn">
                     <FaArrowLeft/>
@@ -53,4 +50,4 @@ const NewToDo = ({openCreateTodo, onClose, toDoList}) => {
     );
 };
 
-export default NewToDo;
+export default CreateTodo;

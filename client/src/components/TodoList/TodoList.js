@@ -2,28 +2,18 @@ import React, {useState, useEffect, Fragment} from 'react';
 import Axios from "axios";
 import {FaPlus} from "react-icons/fa";
 
-import Modal from "../Modal/Modal";
-import NewToDo from "../NewToDo/NewToDo";
+import UpdateTodo from "../UpdateTodo/UpdateTodo";
+import CreateTodo from "../CreateTodo/CreateTodo";
 
 import "../../App.css";
+import {useTodoContext} from "../../providers/TodoProvider";
 
-const ToDoList = () => {
-    const [toDoList, setToDoList] = useState([]);
+const TodoList = () => {
     const [isOpenCreateTodo, setIsOpenCreateTodo] = useState(false);
     const [isOpenModal, setIsOpenModal] = useState(false);
     const [todo, setTodo] = useState("");
 
-    useEffect(() => {
-        getToDoList()
-            .then(() => console.log("TO-DOs", toDoList))
-            .catch(error => console.log("error", error));
-    }, []);
-
-    const getToDoList = async () => {
-        const response = await Axios
-            .get("http://localhost:8080/api/toDoList");
-        setToDoList(response.data);
-    };
+    const {todoList, getToDoList} = useTodoContext();
 
     const getTodoById = async (id) => {
         await Axios.get(`http://localhost:8080/api/todo/${id}`)
@@ -36,7 +26,7 @@ const ToDoList = () => {
     const deleteTodo = ({id, todo}) => {
         if (window.confirm(`Do you really want to delete ${todo}?`)) {
             Axios.delete(`http://localhost:8080/api/delete_todo/${id}`)
-                .then(toDoList => console.log(toDoList))
+                .then(todoList => console.log(todoList))
                 .catch(error => console.log(error));
         }
 
@@ -59,7 +49,7 @@ const ToDoList = () => {
                     </button>
                 </div>
                 <div className="to_do_body">
-                    {toDoList.map(todoItem => (
+                    {todoList.map(todoItem => (
                         <div key={todoItem.id} className="to_do">
                             <div>
                                 {todoItem.todo}
@@ -77,20 +67,20 @@ const ToDoList = () => {
                         </div>
                     ))}
                 </div>
-                <Modal
+                <UpdateTodo
                     todo={todo[0]}
                     open={isOpenModal}
                     onClose={() => setIsOpenModal(false)}
                     handleEscape={handleEscape}
                 />
-                <NewToDo
+                <CreateTodo
                     openCreateTodo={isOpenCreateTodo}
                     onClose={() => setIsOpenCreateTodo(false)}
-                    toDoList={toDoList}
+                    todoList={todoList}
                 />
             </div>
         </Fragment>
     );
 };
 
-export default ToDoList;
+export default TodoList;

@@ -11,7 +11,7 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.get("/api/toDoList", (req, res) => {
-    db.execute("SELECT * FROM todolist")
+    db.execute("SELECT * FROM TodoList")
         .then(([toDoList]) => {
             res.send(toDoList);
         })
@@ -34,7 +34,7 @@ app.get("/api/todo/:id", (req, res) => {
 app.post("/api/post_newToDO",
     (req, res) => {
         const todo = req.body.todo
-        db.execute("INSERT INTO todolist (todo) VALUES (?)",
+        db.execute("INSERT INTO TodoList (todo) VALUES (?)",
             [todo],
             (error, result) => {
                     if (error) {
@@ -48,7 +48,7 @@ app.post("/api/post_newToDO",
 app.put("/api/update/:id",
     (req, res) => {
         const {todo, id} = req.body;
-        db.execute("UPDATE todolist SET todo = ? where id = ?", [todo, id], (err, result) => {
+        db.execute("UPDATE TodoList SET todo = ? where id = ?", [todo, id], (err, result) => {
             if (err) {
                 res.send("Error")
             } else {
@@ -60,7 +60,7 @@ app.put("/api/update/:id",
 app.delete("/api/delete_todo/:id",
     (req, res) => {
         const {id} = req.params;
-        db.execute("DELETE FROM todolist WHERE id = ?",
+        db.execute("DELETE FROM TodoList WHERE id = ?",
             [id],
             (error, result) => {
                     if (error) {

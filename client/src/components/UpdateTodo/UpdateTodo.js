@@ -5,7 +5,7 @@ import {FaArrowLeft} from "react-icons/fa"
 
 import "../../App.css";
 
-const Modal = ({open, onClose, todo, handleEscape}) => {
+const UpdateTodo = ({open, onClose, todo, handleEscape}) => {
     const [updatedTodo, setUpdatedTodo] = useState({todo: ""});
 
     useEffect(() => {
@@ -25,7 +25,7 @@ const Modal = ({open, onClose, todo, handleEscape}) => {
             document.removeEventListener("keydown", keyDownHandler);
     }, []);
 
-    const updateTodo = async (event) => {
+    const updateHandler = async (event) => {
         event.preventDefault();
         const id = updatedTodo.id
 
@@ -41,7 +41,7 @@ const Modal = ({open, onClose, todo, handleEscape}) => {
     if (!open) return false;
     return ReactDOM.createPortal(
         <Fragment>
-            <div className="overlay"/>
+            <div className="overlay" onClick={onClose}/>
             <div className="edit_modal">
                 <button onClick={onClose}
                         className="arrow-left-btn">
@@ -51,7 +51,7 @@ const Modal = ({open, onClose, todo, handleEscape}) => {
                     action="/"
                     method="PUT"
                     className="add-update-todo"
-                    onSubmit={updateTodo}
+                    onSubmit={updateHandler}
                 >
                     <input
                         type="text"
@@ -71,4 +71,4 @@ const Modal = ({open, onClose, todo, handleEscape}) => {
     );
 };
 
-export default Modal;
+export default UpdateTodo;
