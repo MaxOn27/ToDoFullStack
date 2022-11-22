@@ -19,7 +19,8 @@ const TodoProvider = ({children}) => {
     };
 
     const contextValue = {
-        todoList, getToDoList: getToDoList
+        todoList,
+        getToDoList
     };
 
     return <TodoContext.Provider value={contextValue}>{children}</TodoContext.Provider>

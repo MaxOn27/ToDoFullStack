@@ -8,7 +8,7 @@ function App() {
   return (
     <div className="App">
         <TodoProvider>
-          <CreateTodo/>
+          {/*<CreateTodo/>*/}
           <TodoList/>
         </TodoProvider>
     </div>

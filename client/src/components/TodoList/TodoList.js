@@ -1,12 +1,12 @@
-import React, {useState, useEffect, Fragment} from 'react';
+import React, {useState, Fragment} from 'react';
 import Axios from "axios";
 import {FaPlus} from "react-icons/fa";
 
 import UpdateTodo from "../UpdateTodo/UpdateTodo";
 import CreateTodo from "../CreateTodo/CreateTodo";
+import {useTodoContext} from "../../providers/TodoProvider";
 
 import "../../App.css";
-import {useTodoContext} from "../../providers/TodoProvider";
 
 const TodoList = () => {
     const [isOpenCreateTodo, setIsOpenCreateTodo] = useState(false);
