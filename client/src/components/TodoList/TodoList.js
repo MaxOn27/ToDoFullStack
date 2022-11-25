@@ -16,10 +16,8 @@ const TodoList = () => {
     const {todoList, getToDoList} = useTodoContext();
 
     const getTodoById = async (id) => {
-        await Axios.get(`http://localhost:8080/api/todo/${id}`)
-            .then(response => setTodo(response.data))
-            .catch(error => console.log("Error", error));
-
+        const response = await Axios.get(`http://localhost:8080/api/todo/${id}`);
+        setTodo(response.data);
         setIsOpenModal(true);
     };
 
@@ -68,7 +66,7 @@ const TodoList = () => {
                     ))}
                 </div>
                 <UpdateTodo
-                    todo={todo[0]}
+                    todo={todo}
                     open={isOpenModal}
                     onClose={() => setIsOpenModal(false)}
                     handleEscape={handleEscape}
